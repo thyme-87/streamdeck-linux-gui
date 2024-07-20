@@ -40,7 +40,7 @@ class Filter(ABC):
         get_output: Callable[[int], Image.Image],
         input_changed: bool,
         time: Fraction,
-    ) -> Tuple[Image.Image, int]:
+    ) -> Tuple[Image.Image | None, int]:
         """
         Transforms the given input image to the desired output image.
         The default behaviour is to return the orignal image.
