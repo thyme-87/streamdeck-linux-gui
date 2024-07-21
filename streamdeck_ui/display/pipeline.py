@@ -35,7 +35,7 @@ class Pipeline:
         for i, (current_filter, cached) in enumerate(self.filters):
             (image, hashcode) = current_filter.transform(
                 lambda input_image=image: input_image.copy(),  # type: ignore [misc]
-                lambda output_hash, pipeline_hash=pipeline_hash: self.output_cache.get(hash((output_hash, pipeline_hash)), None),  # type: ignore [misc]
+                lambda output_hash, pipeline_hash=pipeline_hash: self.output_cache.get(hash((output_hash, pipeline_hash)), None),  # type: ignore [misc,arg-type]
                 is_modified | self.first_run,
                 time,
             )
