@@ -8,10 +8,10 @@ from streamdeck_ui.display.filter import Filter
 
 
 class TextFilter(Filter):
-    font_blur: ImageFilter.Kernel = None
+    font_blur: ImageFilter.Kernel | None
     # Static instance - no need to create one per Filter instance
 
-    image: Image
+    image: Image.Image
 
     def __init__(
         self, text: str, font: str, font_size: int, font_color: str, vertical_align: str, horizontal_align: str
@@ -38,7 +38,7 @@ class TextFilter(Filter):
         TextFilter.font_blur = ImageFilter.Kernel((5, 5), kernel, scale=0.1 * sum(kernel))
         self.offset = 0.0
         self.offset_direction = 1
-        self.image = None
+        self.image = Image.Image()
 
         # Hashcode should be created for anything that makes this frame unique
         self.hashcode = hash((self.__class__, text, font, font_size, font_color, vertical_align, horizontal_align))
@@ -117,7 +117,7 @@ class TextFilter(Filter):
         get_output: Callable[[int], Image.Image],
         input_changed: bool,
         time: Fraction,
-    ) -> Tuple[Image.Image, int]:
+    ) -> Tuple[Image.Image | None, int]:
         """
         The transformation returns the loaded image, ando overwrites whatever came before.
         """
