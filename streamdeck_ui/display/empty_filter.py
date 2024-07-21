@@ -31,7 +31,7 @@ class EmptyFilter(filter.Filter):
         get_output: Callable[[int], Image.Image],
         input_changed: bool,
         time: Fraction,
-    ) -> Tuple[Image.Image, int]:
+    ) -> Tuple[Image.Image | None, int]:
         """
         Returns an empty Image object.
 
