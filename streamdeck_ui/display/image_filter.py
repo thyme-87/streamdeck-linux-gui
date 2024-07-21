@@ -100,7 +100,7 @@ class ImageFilter(Filter):
         get_output: Callable[[int], Image.Image],
         input_changed: bool,
         time: Fraction,
-    ) -> Tuple[Image.Image, int]:
+    ) -> Tuple[Image.Image | None, int]:
         """
         The transformation returns the loaded image, ando overwrites whatever came before.
         """
