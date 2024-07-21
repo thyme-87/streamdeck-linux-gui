@@ -11,13 +11,13 @@ class Pipeline:
     def __init__(self) -> None:
         self.filters: List[Tuple[Filter, Image | None]] = []
         self.first_run = True
-        self.output_cache: Dict[int, Image] = {}
+        self.output_cache: Dict[int, Image | None] = {}
 
     def add(self, filter: Filter) -> None:
         self.filters.append((filter, None))
         self.first_run = True
 
-    def execute(self, time: Fraction) -> Tuple[Image, int]:
+    def execute(self, time: Fraction) -> Tuple[Image | None, int]:
         """
         Executes all the filter in the pipeline and returns the final image, or None if the pipeline did not yield any changes.
         """
@@ -63,7 +63,7 @@ class Pipeline:
 
         return (image if is_modified else None, pipeline_hash)
 
-    def last_result(self) -> Image:
+    def last_result(self) -> Image | None:
         """
         Returns the last known output of the pipeline
         """
